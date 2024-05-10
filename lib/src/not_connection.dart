@@ -8,11 +8,11 @@ class NotConnection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AlertDialog(
-      title: Text("not connection"),
+      title: Text('インターネットに接続されていません'),
       content: SizedBox(
         width: 200,
         height: 200,
-        child: Text("network error."),
+        child: Text('Wi-Fi をオンにするか、モバイルをオンにしてから、再起動して下さい。'),
       ),
     );
   }

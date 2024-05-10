@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_player_iframe_web_example/src/connectivity_sample.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,13 +27,16 @@ class MyApp extends StatelessWidget {
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(32),
           child: SizedBox(
-            height: 2000,
+            height: 1000,
             child: LayoutBuilder(
               builder: (context, constraints) {
                 if (constraints.maxWidth < 600) {
                   return const Column(
                     children: [
-                      PlayerWidget(),
+                      SizedBox(
+                        height:400,
+                          child: PlayerWidget(),
+                      ),
                       Divider(),
                       Expanded(child: _WebViewWidget()),
                     ],
@@ -63,15 +67,17 @@ class PlayerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return YoutubePlayer(
-      controller: YoutubePlayerController.fromVideoId(
-        videoId: 'StwDgaLTwwQ',
-        params: const YoutubePlayerParams(
-          showControls: true,
-          showFullscreenButton: true,
+    return ConnectivitySample(
+      child: YoutubePlayer(
+        controller: YoutubePlayerController.fromVideoId(
+          videoId: 'StwDgaLTwwQ',
+          params: const YoutubePlayerParams(
+            showControls: true,
+            showFullscreenButton: true,
+          ),
         ),
+        aspectRatio: 5 / 8,
       ),
-      aspectRatio: 5 / 8,
     );
   }
 }
@@ -94,6 +100,6 @@ class _WebViewWidgetState extends State<_WebViewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return WebViewWidget(controller: _controller);
+    return ConnectivitySample(child: WebViewWidget(controller: _controller));
   }
 }
